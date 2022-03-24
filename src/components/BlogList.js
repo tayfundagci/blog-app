@@ -6,12 +6,16 @@ import deleteIcon from "../assets/deleteIcon.svg";
 import { db } from "../firebase/config";
 import { doc, deleteDoc } from "firebase/firestore";
 
+import { useHistory } from "react-router-dom";
+
 export default function BlogList({ blogs }) {
   const { mode } = useTheme();
+  const history = useHistory();
 
   const handleDelete = async (id) => {
     const ref = doc(db, "blogs", id);
     await deleteDoc(ref);
+    window.location.reload();
   };
 
   if (blogs.length === 0) {
